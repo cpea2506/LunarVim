@@ -87,6 +87,7 @@ return {
   document_highlight = false,
   code_lens_refresh = true,
   handlers = {
+    ---@usage list of the keys to override behavior of the handlers
     override_config = {
       focusable = true,
       style = "minimal",
