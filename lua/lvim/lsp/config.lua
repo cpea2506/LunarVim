@@ -54,14 +54,10 @@ local join_paths = require("lvim.utils").join_paths
 
 return {
   templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
+  ---@deprecated use vim.diagnostic.config() instead
+  diagnostics = {},
   document_highlight = false,
   code_lens_refresh = true,
-  ---@usage list of the keys to override behavior of the handlers
-  handlers = {
-    focusable = true,
-    style = "minimal",
-    border = "rounded",
-  },
   on_attach_callback = nil,
   on_init_callback = nil,
   automatic_configuration = {
@@ -83,11 +79,9 @@ return {
           local config = vim.tbl_get(vim.diagnostic.config(), "float")
 
           if config then
-            return
+            config.scope = "line"
+            vim.diagnostic.open_float(0, config)
           end
-
-          config.scope = "line"
-          vim.diagnostic.open_float(0, config)
         end,
         "Show line diagnostics",
       },
